@@ -28,6 +28,15 @@ class PaintLine {
     return this;
   }
 
+  PaintLine toggleColor() {
+    if (_color == Colors.blue) {
+      _color = Colors.red;
+    } else {
+      _color = Colors.blue;
+    }
+    return this;
+  }
+
   List<Offset> currentLine() {
     return _currentLine;
   }

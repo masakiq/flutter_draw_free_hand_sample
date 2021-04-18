@@ -12,6 +12,10 @@ class PaintLineNotifier extends StateNotifier<PaintLine> {
   void addPositionHistory() {
     state = state.addPositionHistory();
   }
+
+  void toggleColor() {
+    state = state.toggleColor();
+  }
 }
 
 final paintLineNotifier = StateNotifierProvider<PaintLineNotifier>((ref) {
