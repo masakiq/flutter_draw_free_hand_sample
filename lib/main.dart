@@ -3,10 +3,35 @@ import 'dart:ui';
 import 'package:flutter/rendering.dart';
 
 void main() {
-  runApp(Container(
-    color: Colors.white,
-    child: Writeable(),
-  ));
+  runApp(
+    MaterialApp(
+      // バックグラウンドにイメージ設定
+      home: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/Icon-192.png'),
+          ),
+        ),
+        child: Writeable(),
+      ),
+      // Stack を使う
+      // home: Container(
+      //   color: Colors.white,
+      //   child: Stack(
+      //     children: [
+      //       Image.asset('assets/images/Icon-192.png'),
+      //       Writeable(),
+      //     ],
+      //   ),
+      // ),
+    ),
+  );
+  // runApp(
+  //   Container(
+  //     color: Colors.white,
+  //     child: Writeable(),
+  //   ),
+  // );
 }
 
 class Writeable extends StatefulWidget {
@@ -67,13 +92,8 @@ class Painter extends CustomPainter {
     return true;
   }
 
-  // Paints here using drawPoints and PointMode.lines, but have also tried
-  // PointMode.points, PointMode.polygon and drawPath with a path variable and
-  // moveTo, lineTo methods.
   @override
   void paint(Canvas canvas, Size size) {
-    // Paint line currently being drawn (points added since pointer was
-    // last lifted)
     paintStyle.color = color;
     paintStyle.strokeWidth = 3;
     for (int i = 0; i < currentLine.length - 1; i++) {
@@ -83,7 +103,6 @@ class Painter extends CustomPainter {
         paintStyle,
       );
     }
-    // Paint all completed lines drawn since app start
     for (int i = 0; i < lines.length; i++) {
       for (int j = 0; j < lines[i].length - 1; j++) {
         canvas.drawPoints(
