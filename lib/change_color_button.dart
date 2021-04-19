@@ -18,7 +18,25 @@ class ChangeColorButton extends ConsumerWidget {
         onPrimary: Colors.white,
       ),
       onPressed: () {
-        context.read<PaintLineNotifier>(paintLineNotifier).toggleColor();
+        bool blueLine = context
+            .read<PaintLineNotifier>(paintLineNotifier(Colors.blue))
+            .state
+            .isActive();
+        if (blueLine) {
+          context
+              .read<PaintLineNotifier>(paintLineNotifier(Colors.blue))
+              .setActive(false);
+          context
+              .read<PaintLineNotifier>(paintLineNotifier(Colors.red))
+              .setActive(true);
+        } else {
+          context
+              .read<PaintLineNotifier>(paintLineNotifier(Colors.blue))
+              .setActive(true);
+          context
+              .read<PaintLineNotifier>(paintLineNotifier(Colors.red))
+              .setActive(false);
+        }
       },
     );
   }

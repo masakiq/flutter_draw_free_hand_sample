@@ -4,16 +4,21 @@ class PaintLine {
   List<Offset> _currentLine = [];
   List<List<Offset>> _lines = [[]];
   Color _color = Colors.blue;
+  bool _active = false;
 
-  PaintLine([currentLine, lines, color]) {
+  PaintLine(Color color, [currentLine, lines, active]) {
+    _color = color;
     if (currentLine != null) {
       _currentLine = currentLine;
     }
     if (lines != null) {
       _lines = lines;
     }
-    if (color != null) {
-      _color = color;
+    if (color == Colors.blue) {
+      _active = true;
+    }
+    if (active != null) {
+      _active = active;
     }
   }
 
@@ -28,12 +33,8 @@ class PaintLine {
     return this;
   }
 
-  PaintLine toggleColor() {
-    if (_color == Colors.blue) {
-      _color = Colors.red;
-    } else {
-      _color = Colors.blue;
-    }
+  PaintLine setActive(bool active) {
+    _active = active;
     return this;
   }
 
@@ -47,5 +48,9 @@ class PaintLine {
 
   Color currentColor() {
     return _color;
+  }
+
+  bool isActive() {
+    return _active;
   }
 }

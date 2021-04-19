@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:draw_free_hand_sample/paint_line.dart';
 
 class PaintLineNotifier extends StateNotifier<PaintLine> {
-  PaintLineNotifier() : super(PaintLine());
+  PaintLineNotifier(color) : super(PaintLine(color));
 
   void addPosition(Offset position) {
     state = state.addPosition(position);
@@ -13,11 +13,12 @@ class PaintLineNotifier extends StateNotifier<PaintLine> {
     state = state.addPositionHistory();
   }
 
-  void toggleColor() {
-    state = state.toggleColor();
+  void setActive(bool active) {
+    state = state.setActive(active);
   }
 }
 
-final paintLineNotifier = StateNotifierProvider<PaintLineNotifier>((ref) {
-  return PaintLineNotifier();
+final paintLineNotifier = StateNotifierProvider.autoDispose
+    .family<PaintLineNotifier, Color>((ref, color) {
+  return PaintLineNotifier(color);
 });
